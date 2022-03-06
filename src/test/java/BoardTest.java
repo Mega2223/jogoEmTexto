@@ -1,26 +1,24 @@
+import net.Mega2223.jogoemtexto.GameBoard;
 import net.Mega2223.jogoemtexto.entidades.Dummy;
 import net.Mega2223.jogoemtexto.entidades.Entidade;
 import net.Mega2223.jogoemtexto.entidades.RandomWalker;
 import net.Mega2223.jogoemtexto.graficos.RenderBoard;
-import net.Mega2223.jogoemtexto.interfaces.Atualizável;
 import net.Mega2223.jogoemtexto.objetos.Dim2D;
 
-public class RenderTest {
+public class BoardTest {
     public static void main(String[] args) throws InterruptedException {
-        Entidade dummy = new Dummy();
-        dummy.coords().setCoords(new double[]{1,1});
+        Entidade dummy = new RandomWalker();
 
-        RenderBoard board = new RenderBoard(1,new Dim2D(30,30));
-        board.addToLayer(dummy,0);
+        GameBoard board = new GameBoard(new Dim2D(40,40));
+
+        board.addEntity(dummy,0);
 
         int itner = 0;
         while (true){
-            double legl = (Math.sin((double)itner/10)+1)*10;
-            dummy.coords().setX(legl);
             Thread.sleep(100);
-            System.out.println(board.getRenderedBoard());
+            board.playTick();
+            System.out.println(board.getRender());
             itner++;
         }
-
     }
 }

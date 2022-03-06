@@ -1,25 +1,25 @@
-package net.Mega2223.jogoemtexto.objetos;
+package net.Mega2223.jogoemtexto.graficos;
 
-import net.Mega2223.jogoemtexto.Utils;
-import net.Mega2223.jogoemtexto.graficos.RenderUtils;
 import net.Mega2223.jogoemtexto.interfaces.Renderizável;
+import net.Mega2223.jogoemtexto.objetos.Coord2D;
+import net.Mega2223.jogoemtexto.objetos.Dim2D;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Board {
+public class RenderBoard {
 
-    List<Renderizável>[] layers;
+    protected List<Renderizável>[] layers;
     Dim2D size;
 
-    public Board(List<Renderizável>[] renders, Dim2D size) {
+    public RenderBoard(List<Renderizável>[] renders, Dim2D size) {
         layers = renders.clone();
         this.size = size;
     }
 
-    public Board(int layers, Dim2D size) {
+    public RenderBoard(int layers, Dim2D size) {
         this.layers = new List[layers];
-        for (int i = 0; i < this.layers.length; i++) {
+        for (int i = 0; i < this.getLayers().length; i++) {
             this.layers[i] = new ArrayList<>();
         }
         this.size = size;
@@ -29,10 +29,14 @@ public class Board {
         layers[layer].add(addWhat);
     }
 
-    public void removeFromLayer(Renderizável removeWhat, int layer) {
+    public void removeFromLayer(Object removeWhat, int layer) {
         layers[layer].remove(removeWhat);
     }
-
+    public void remove(Object removeWhat) {
+        for (int i = 0; i < layers.length; i++) {
+            removeFromLayer(removeWhat, i);
+        }
+    }
     public String getRenderedBoard() {
         char[][] legal = new char[(int) size.getY()][(int) size.getX()];
 
@@ -62,7 +66,7 @@ public class Board {
         //por isso a subtração no retorno tb
         y = size.getY() - y;
         try {
-            for (List<Renderizável> layer : layers) {
+            for (List<Renderizável> layer : getLayers()) {
                 for (Renderizável act : layer) {
                     Coord2D coords = act.coords();
                     Dim2D size = RenderUtils.getSize(act);
@@ -79,5 +83,9 @@ public class Board {
 
             return ' ';
         } catch (StringIndexOutOfBoundsException ex){return ' ';}
+    }
+
+    public List<Renderizável>[] getLayers() {
+        return layers.clone();
     }
 }

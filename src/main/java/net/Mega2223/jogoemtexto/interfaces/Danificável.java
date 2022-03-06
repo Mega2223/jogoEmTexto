@@ -1,6 +1,6 @@
 package net.Mega2223.jogoemtexto.interfaces;
 
-public interface Danificável {
+public interface Danificável extends Atualizável{
 
     default void onHealthChange(int damage){}
 
@@ -11,7 +11,7 @@ public interface Danificável {
         regenerate(1);
     }
 
-
+    boolean isDead = false;
 
     void doDamage(int damage);
     void regenerate(int health);

@@ -10,7 +10,7 @@ public class Player extends Entidade{
 
     public Player(){
         Utils.debug(System.getProperty("user.dir"));
-        render = RenderUtils.getRenderFromFile(System.getProperty("user.dir")+"\\src\\main\\resources\\EntityTextures\\PlayerTexture.StrText");
+        render = RenderUtils.getRenderFromFile(Utils.TEXTURES_DIR+"\\PlayerTexture.StrText");
 
         for(String ac : render){
             Utils.debug(ac);

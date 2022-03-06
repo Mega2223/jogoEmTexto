@@ -7,8 +7,10 @@ import net.Mega2223.jogoemtexto.interfaces.Renderizável;
 import net.Mega2223.jogoemtexto.objetos.Coord2D;
 
 public abstract class Entidade implements Renderizável, Atualizável, Danificável {
-
+    //todo suporte pra spawn
     public void onSpawn(){}
+
+
 
     public void onDeath(){}
 
